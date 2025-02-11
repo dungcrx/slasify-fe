@@ -11,7 +11,6 @@ export default function usePosts() {
     async queryFn() {
       const r = await fetch(import.meta.env.VITE_APP_API_URL + '/messages/all', {
         headers: {
-          authorization: 'Bearer ' + user.token,
         },
       });
 

@@ -29,15 +29,22 @@ export function usePost() {
   const client = useQueryClient();
   return useMutation<unknown, unknown, CommentPayload>({
     async mutationFn(data) {
-      const r = await fetch(import.meta.env.VITE_APP_API_URL + '/messages/post', {
+      const response = await fetch(import.meta.env.VITE_APP_API_URL + '/messages/post', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
-          'content-type': 'application/json',
-          authorization: 'Bearer ' + user.token,
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + user.token,
         },
       });
-      await r.json();
+
+      // Check if the response is successful
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Return the response text
+      return response.text();
     },
     onSuccess() {
       client.invalidateQueries({

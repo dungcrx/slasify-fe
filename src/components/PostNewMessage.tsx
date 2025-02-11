@@ -13,7 +13,13 @@ export const PostNewMessage: () => JSX.Element = () => {
 
   const onSubmit = (d: CommentPayload) => {
     mutation.mutate(d, {
-      onSuccess: () => form.reset(),
+      onSuccess: () => {
+        console.log('Mutation successful');
+        form.reset()
+      },
+      onError: (error: any) => {
+        console.error('Mutation failed:', error);
+      },
     });
   };
 
