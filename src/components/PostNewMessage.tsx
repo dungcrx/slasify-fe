@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import {JSX} from 'react';
 import { useForm } from 'react-hook-form';
 import { CommentPayload, usePost } from '../hooks/usePostComment';
 
-export const PostNewMessage: FC = () => {
+export const PostNewMessage: () => JSX.Element = () => {
   const mutation = usePost();
   const form = useForm<CommentPayload>({
     defaultValues: {
