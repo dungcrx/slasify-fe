@@ -62,28 +62,27 @@ export const Post: ({post: d, idx}: { post: any; idx: any }) => JSX.Element = ({
               Reply
             </a>
           )}
-          {children?.length ? (
-            <>
-              {showAllReplies.value ? (
-                <div>
-                  {children.map((d, idx) => (
-                    <Post post={d} idx={idx} key={d.id} />
-                  ))}
-                </div>
-              ) : (
-                <a
-                  href="#"
-                  className="text-sm underline-offset-2 hover:underline"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    showAllReplies.setTrue();
-                  }}
-                >
-                  View all {children?.length} replies
-                </a>
-              )}
-            </>
-          ) : null}
+            {children?.length ? (
+                <>
+                    {/* Show all replies if there are 5 or fewer, or if the user has clicked "View all replies" */}
+                    {children.length <= 5 || showAllReplies.value ? (
+                        <div>
+                            {children.map((reply, idx) => (
+                                <Post post={reply} idx={idx} key={reply.id} />
+                            ))}
+                        </div>
+                    ) : (
+                        <a href="#" className="text-sm underline-offset-2 hover:underline"
+                           onClick={(e) => {
+                               e.preventDefault();
+                               showAllReplies.setTrue();
+                           }}
+                        >
+                            View all {children.length} replies
+                        </a>
+                    )}
+                </>
+            ) : null}
         </div>
       </div>
     </div>
