@@ -1,5 +1,5 @@
 # React + TypeScript
-
+install node version 20
 ```
 npm install
 ```
